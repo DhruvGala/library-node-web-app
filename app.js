@@ -6,7 +6,7 @@ const path = require('path');
 
 const app = express();
 const port = process.env.PORT || 3000;
-const bookRouter = express.Router();
+const bookRouter = require('./src/routes/bookRoutes');
 
 app.use(morgan('tiny'));
 app.use(express.static(path.join(__dirname, '/public/')));
@@ -15,46 +15,6 @@ app.use('/js', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/
 app.use('/js', express.static(path.join(__dirname, 'node_modules/jquery/dist')));
 app.set('views', './src/views');
 app.set('view engine', 'ejs');
-
-const books = [
-  {
-    title: 'How to Be Alone',
-    author: 'Sara Maitland',
-    rating: 4
-  },
-  {
-    title: 'The Alchemist',
-    author: 'Paulo Coelho',
-    rating: 4
-  },
-  {
-    title: 'Alan Turing: Unlocking the Enigma',
-    author: 'David Boyle',
-    rating: 4
-  },
-  {
-    title: 'A Brief History of Time',
-    author: 'Dr. Stephen Hawking',
-    rating: 5
-  },
-];
-
-bookRouter.route('/books')
-  .get((req, res) => {
-    res.render(
-      'books',
-      {
-        nav: [{
-          link: '/books', title: 'Books'
-        },
-        {
-          link: '/authors', title: 'Authors'
-        }],
-        title: 'Library',
-        books
-      }
-    );
-  });
 
 app.use('/', bookRouter);
 app.get('/', (req, res) => {
