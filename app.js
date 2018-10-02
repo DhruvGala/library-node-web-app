@@ -16,9 +16,33 @@ app.use('/js', express.static(path.join(__dirname, 'node_modules/jquery/dist')))
 app.set('views', './src/views');
 app.set('view engine', 'ejs');
 
+const books = [
+  {
+    title: 'How to Be Alone',
+    author: 'Sara Maitland',
+    rating: 4
+  },
+  {
+    title: 'The Alchemist',
+    author: 'Paulo Coelho',
+    rating: 4
+  },
+  {
+    title: 'Alan Turing: Unlocking the Enigma',
+    author: 'David Boyle',
+    rating: 4
+  },
+  {
+    title: 'A Brief History of Time',
+    author: 'Dr. Stephen Hawking',
+    rating: 5
+  },
+];
+
 bookRouter.route('/books')
   .get((req, res) => {
-    res.render('books',
+    res.render(
+      'books',
       {
         nav: [{
           link: '/books', title: 'Books'
@@ -26,8 +50,10 @@ bookRouter.route('/books')
         {
           link: '/authors', title: 'Authors'
         }],
-        title: 'Library'
-      });
+        title: 'Library',
+        books
+      }
+    );
   });
 
 app.use('/', bookRouter);
