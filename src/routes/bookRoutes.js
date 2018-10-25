@@ -1,4 +1,5 @@
 const express = require('express');
+
 const bookRouter = express.Router();
 
 const books = [
@@ -27,7 +28,7 @@ const books = [
 bookRouter.route('/books')
   .get((req, res) => {
     res.render(
-      'books',
+      'bookListView',
       {
         nav: [{
           link: '/books', title: 'Books'
@@ -41,11 +42,11 @@ bookRouter.route('/books')
     );
   });
 
-bookRouter.route('/:id')
+bookRouter.route('/books/:id')
   .get((req, res) => {
     const { id } = req.params;
     res.render(
-      'book',
+      'bookView',
       {
         nav: [{
           link: '/books', title: 'Books'
