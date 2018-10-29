@@ -26,7 +26,7 @@ function router(nav) {
     },
   ];
 
-  bookRouter.route('/books')
+  bookRouter.route('/')
     .get((req, res) => {
       res.render(
         'bookListView',
@@ -38,7 +38,7 @@ function router(nav) {
       );
     });
 
-  bookRouter.route('/books/:id')
+  bookRouter.route('/:id')
     .get((req, res) => {
       const { id } = req.params;
       res.render(
